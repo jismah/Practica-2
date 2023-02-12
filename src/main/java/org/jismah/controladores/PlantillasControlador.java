@@ -46,12 +46,18 @@ public class PlantillasControlador extends BaseControlador {
                 });
             });
 
+            path("/customer", () -> {
+                get("/", ctx -> {
+                    ctx.result("Vista de customers");
+                });
+            });
+
 
         });
     }
 
     @NotNull
-    private List<Usuario> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         //listando los usuarios..
         List<Usuario> listaUsuario = new ArrayList<>();
         listaUsuario.add(new Usuario(1, "JohnRodriguez", "John", "123456"));

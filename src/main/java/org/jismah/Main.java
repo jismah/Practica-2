@@ -21,10 +21,16 @@ public class Main {
 
         System.out.println("* Servidor Arriba!");
 
-        app.get("/", ctx -> ctx.result("Welcome to POS Server!"));
+        app.get("/", ctx -> ctx.result("Welcome to E-Commerce Server!"));
 
         //Manejo de plantillas.
         new PlantillasControlador(app).aplicarRutas();
+
+        //Manejadores de Endpoints
+        new Manejadores(app).aplicarRutas();
+
+        //Manejadores de Envio de DATA
+        new HandlerData(app).aplicarRutas();
 
 
     }
