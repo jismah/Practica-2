@@ -1,28 +1,39 @@
 package org.jismah.entidades;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Producto {
 
-    private int id;
+    private UUID id;
 
     private String nombre;
 
     private BigDecimal precio;
 
+    private int cantidad;
 
-    public Producto(int id, String nombre, BigDecimal precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
+
+    public Producto(String name, BigDecimal price) {
+        this.nombre = name;
+        this.precio = price;
+        this.id = UUID.randomUUID();
     }
 
 
-    public int getId() {
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -38,7 +49,18 @@ public class Producto {
         return precio;
     }
 
+
+
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                '}';
     }
 }

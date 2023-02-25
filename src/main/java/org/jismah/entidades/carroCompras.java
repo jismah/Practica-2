@@ -1,29 +1,62 @@
 package org.jismah.entidades;
 
+import org.jismah.controladores.Core;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class carroCompras {
-    private long id;
-    private List<Producto> listaProductos;
+    private Map<UUID, Integer> items;
 
-    public carroCompras(long id, List<Producto> listaProductos) {
-        this.id = id;
-        this.listaProductos = listaProductos;
+    public carroCompras() {
+        this.items = new HashMap<>();
     }
 
-    public long getId() {
-        return id;
+    public void addItem(UUID id, int cant) {
+        int currentCant = items.getOrDefault(id, 0);
+        items.put(id, currentCant + cant);
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void reduceItem(UUID id, int cant) {
+        int currentCant = items.getOrDefault(id, 0);
+        int newCant = currentCant - cant;
+        if (newCant <= 0) {
+            items.remove(id);
+        } else {
+            items.put(id, newCant);
+        }
     }
 
-    public List<Producto> getListaProductos() {
-        return listaProductos;
+    public void removeItem(UUID id) {
+        items.remove(id);
     }
 
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
+    public Map<UUID, Integer> getItems() {
+        return items;
+    }
+
+    public BigDecimal getTotal() {
+        BigDecimal total = BigDecimal.valueOf(0.00);
+        Producto product;
+        for (Map.Entry<UUID,Integer> item: items.entrySet()) {
+            product = Core.getInstance().getProductById(item.getKey());
+            total = total.add(product.getPrecio().multiply(BigDecimal.valueOf(item.getValue())));
+        }
+        return total;
+    }
+
+    public Integer getItemCount() {
+        Integer total = 0;
+        for (Integer count : items.values()) {
+            total += count;
+        }
+        return  total;
+    }
+
+    public void clearCart() {
+        items.clear();
     }
 }

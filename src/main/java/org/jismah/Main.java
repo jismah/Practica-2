@@ -29,9 +29,6 @@ public class Main {
         //Manejadores de Endpoints
         new Manejadores(app).aplicarRutas();
 
-        //Manejadores de Envio de DATA
-        new HandlerData(app).aplicarRutas();
-
 
     }
 }

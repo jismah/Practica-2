@@ -23,7 +23,11 @@ dependencies {
     implementation 'io.javalin:javalin:5.3.2'
 
     //Dependencia de Thymeleaf
-    implementation('org.thymeleaf:thymeleaf:3.0.12.RELEASE')
+    implementation 'org.thymeleaf:thymeleaf:3.1.1.RELEASE'
+
+    implementation("io.javalin:javalin-rendering:5.3.2")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
 }
 
 run{
